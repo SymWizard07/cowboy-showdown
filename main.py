@@ -1,10 +1,26 @@
 import utility_aew_caw as util
-from modules import keyboard # type: ignore
-print(keyboard.__file__)
+import sys
+sys.path.append('./modules')
+from pynput.keyboard import Key, Listener
+
+def on_press(key):
+    print('{0} pressed'.format(
+        key))
+
+def on_release(key):
+    print('{0} release'.format(
+        key))
+    if key == Key.esc:
+        # Stop listener
+        return False
+
+# Collect events until released
+with Listener(
+        on_press=on_press,
+        on_release=on_release) as listener:
+    listener.join()
 
 def __main__():
-    while True:
-        if keyboard.is_pressed('q'):
-            print("you pressed q")
+    pass
 
 __main__()
