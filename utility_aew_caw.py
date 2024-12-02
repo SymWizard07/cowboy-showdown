@@ -19,4 +19,4 @@ def setup_turtle():
 
 #cowboy function
 def cowboy():
-    
+    pass
