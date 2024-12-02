@@ -3,6 +3,8 @@ from modules import keyboard # type: ignore
 print(keyboard.__file__)
 
 def __main__():
-    pass
+    while True:
+        if keyboard.is_pressed('q'):
+            print("you pressed q")
 
 __main__()
