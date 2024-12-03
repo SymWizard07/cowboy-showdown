@@ -1,26 +1,33 @@
 import utility_aew_caw as util
+import turtle
 import sys
 sys.path.append('./modules')
 from pynput.keyboard import Key, Listener
 
+screen = turtle.Screen()
+util.setup_screen(screen)
+ori = turtle.Turtle()
+util.setup_turtle(ori)
+
 def on_press(key):
-    print('{0} pressed'.format(
-        key))
+    try:
+        if key.char == 'z' and util.has_focus(screen):
+            print("Pow!")
+    except AttributeError:
+        pass
 
 def on_release(key):
-    print('{0} release'.format(
-        key))
     if key == Key.esc:
         # Stop listener
         return False
 
 # Collect events until released
-with Listener(
-        on_press=on_press,
-        on_release=on_release) as listener:
-    listener.join()
+listener = Listener(on_press=on_press, on_release=on_release)
+listener.start()
 
 def __main__():
     pass
 
 __main__()
+
+turtle.done()
