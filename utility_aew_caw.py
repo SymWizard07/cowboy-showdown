@@ -31,7 +31,7 @@ def draw_text(ori, text):
 
 def clear_text(ori):
     # draw rectangle over previous text
-    rect_size = 600
+    rect_size = 1000
     ori.penup()
     ori.goto(-1 * (rect_size / 2), 200)
     ori.pendown()
