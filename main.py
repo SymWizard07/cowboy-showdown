@@ -7,11 +7,13 @@ import sys
 sys.path.append('./modules')
 from pynput.keyboard import Key, Listener
 
+
 print("Would you like to play against a friend or the computer?")
 print("1. Friend")
 print("2. Computer")
 choice = input("Enter 1 or 2: ")
 is_computer = False
+
 if choice == "1":
     print("You have chosen to play against a friend.")
     print("Player 1: Press 'z' to fire")
