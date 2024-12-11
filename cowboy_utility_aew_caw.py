@@ -3,6 +3,7 @@ import random
 #player1() function
 def player1(ori):
     #cowboy face
+    ori.pencolor("black")
     ori.setheading(0)
     ori.penup()
     ori.goto(-300,0)
@@ -241,15 +242,17 @@ def blood_spurt(ori, is_player1):
 
 #function to clear the explosion and blood
 def clear_cowboys(ori):
+    ori.penup()
+    ori.goto(-400,150)
     ori.setheading(0)
-    ori.goto(-350,100)
+    ori.pendown()
     ori.pencolor("orange")
     ori.fillcolor("orange")
     ori.begin_fill()
-    #easy spiky blood
+    
     for i in range(2):
-        ori.forward(700)
+        ori.forward(800)
         ori.right(90)
-        ori.forward(150)
+        ori.forward(400)
         ori.right(90)
-        ori.end_fill()
+    ori.end_fill()

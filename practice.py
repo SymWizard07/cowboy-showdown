@@ -223,4 +223,19 @@ for i in range(20):
     ori.left(130)
 ori.end_fill()
 
+ori.penup()
+ori.goto(-400,150)
+ori.setheading(0)
+ori.pendown()
+ori.pencolor("orange")
+ori.fillcolor("orange")
+ori.begin_fill()
+for i in range(2):
+    ori.forward(800)
+    ori.right(90)
+    ori.forward(400)
+    ori.right(90)
+ori.end_fill()
+
+
 turtle.done()
