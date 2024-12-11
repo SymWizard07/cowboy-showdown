@@ -1,3 +1,5 @@
+import random
+
 #player1() function
 def player1(ori):
     #cowboy face
@@ -178,7 +180,7 @@ def player2(ori):
     return
 
 #gunshot explosion function
-def explosion(ori, is_player1, random):
+def explosion(ori, is_player1):
     if is_player1:
         ori.penup()
         ori.goto(-240,-35)
