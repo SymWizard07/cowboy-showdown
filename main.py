@@ -3,10 +3,23 @@ import cowboy_utility_aew_caw as cowboy_util
 import turtle
 import random
 import time
-import threading
 import sys
 sys.path.append('./modules')
 from pynput.keyboard import Key, Listener
+
+print("Would you like to play against a friend or the computer?")
+print("1. Friend")
+print("2. Computer")
+choice = input("Enter 1 or 2: ")
+is_computer = False
+if choice == "1":
+    print("You have chosen to play against a friend.")
+    print("Player 1: Press 'z' to fire")
+    print("Player 2: Press 'm' to fire")
+else:
+    print("You have chosen to play against the computer.")
+    print("Player 1: Press 'z' to fire")
+    is_computer = True
 
 screen = turtle.Screen()
 util.setup_screen(screen)
@@ -43,60 +56,75 @@ def start_round():
             point(2)
             util.draw_text(ori, "Player 1 shot too early!")
             return
-        elif player2_fired:
+        elif player2_fired and not is_computer:
             point(1)
             util.draw_text(ori, "Player 2 shot too early!")
             return
-        #print(player1_fired)
-        time.sleep(0.1)
+        turtle.update()
+        time.sleep(0.01)
     # display draw text. A user who fires in this period will win a point.
+    computer_reaction_time = random.randint(450, 800) / 1000
+    draw_time = time.time()
     util.draw_text(ori, "Draw!")
-    while not player1_fired and not player2_fired:
+    while True:
         if player1_fired:
+            cowboy_util.explosion(ori, True)
             point(1)
             util.draw_text(ori, "Player 1 wins!")
             return
-        elif player2_fired:
+        elif player2_fired and not is_computer:
+            cowboy_util.explosion(ori, False)
             point(2)
             util.draw_text(ori, "Player 2 wins!")
             return
-        time.sleep(0.1)
+        elif time.time() - draw_time > computer_reaction_time and is_computer:
+            cowboy_util.explosion(ori, False)
+            point(2)
+            util.draw_text(ori, "Computer wins!")
+            return
+        turtle.update()
+        time.sleep(0.01)
 
 def on_press(key):
     global player1_fired, player2_fired, space_pressed
-    if key == Key.space and util.has_focus(screen):
+    if key == Key.space:
         space_pressed = True
     try:
-        if key.char == 'z' and util.has_focus(screen):
+        if key.char == 'z':
             player1_fired = True
-        elif key.char == 'm' and util.has_focus(screen):
+        elif key.char == 'm':
             player2_fired = True
-        # detect space key to start a new round
     except AttributeError:
         pass
 
 def on_release(key):
-    global space_pressed
+    global player1_fired, player2_fired, space_pressed
     if key == Key.space:
         space_pressed = False
     try:
         if key.char == 'z':
-            pass
-            #player1_fired = False
+            player1_fired = False
         elif key.char == 'm':
-            pass
-            #player2_fired = False
+            player2_fired = False
     except AttributeError:
         pass
 
 listener = Listener(on_press=on_press, on_release=on_release)
 listener.start()
 
-def __main__():
-    util.draw_text(ori, "Press space to start a new round")
+def main():
     cowboy_util.player1(ori)
     cowboy_util.player2(ori)
-    cowboy_util.explosion(ori, )
+    util.draw_scores(ori, player1_score, player2_score)
+    util.draw_text(ori, "Press space to start a new round")
+    while True:
+        if space_pressed:
+            start_round()
+            time.sleep(2)
+            util.draw_text(ori, "Press space to start a new round")
+        turtle.update()
+        time.sleep(0.1)
 
-__main__()
-turtle.done()
+if __name__ == "__main__":
+    main()
+    turtle.done()

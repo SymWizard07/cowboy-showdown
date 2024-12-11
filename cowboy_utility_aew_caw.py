@@ -196,6 +196,7 @@ def explosion(ori, is_player1):
             ori.left(45)
         ori.end_fill()
     else:
+        ori.penup()
         ori.goto(240,-35)
         ori.pendown()
         ori.pencolor("red")

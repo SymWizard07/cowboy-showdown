@@ -5,6 +5,9 @@ def setup_screen(screen):
     screen.setup(1000,600)
     screen.bgcolor("orange")
     screen.title("Cowboy Showdown")
+    # force screen to foreground and to be in focus
+    root = screen.getcanvas().winfo_toplevel()
+    root.attributes("-topmost", True)
     return screen
 
 #check for window focus
@@ -38,6 +41,7 @@ def clear_text(ori):
     ori.pendown()
     ori.fillcolor("orange")
     ori.color("orange")
+    ori.setheading(0)
     ori.begin_fill()
     for i in range(2):
         ori.forward(rect_size)
@@ -48,44 +52,38 @@ def clear_text(ori):
 
 # draw scores for each player on the left and right side of the top of the screen.
 def draw_scores(ori, player1_score, player2_score):
-    # draw rectangle over previous text
-    rect_size = 150
+    clear_scores(ori)
+
     ori.penup()
-    ori.goto(-1 * (rect_size / 2), 300)
-    ori.pendown()
-    ori.fillcolor("orange")
-    ori.color("orange")
-    ori.begin_fill()
-    for i in range(2):
-        ori.forward(rect_size)
-        ori.right(90)
-        ori.forward(50)
-        ori.right(90)
-    ori.end_fill()
-    ori.penup()
-    ori.goto(-1 * (rect_size / 2), 300)
+    ori.goto(-300, -290)
     ori.pendown()
     ori.fillcolor("black")
     ori.color("black")
     ori.write("Player 1: " + str(player1_score), font=("Courier", 24, "bold"), align="center")
+
     ori.penup()
-    ori.goto(0, 300)
-    ori.pendown()
-    ori.fillcolor("orange")
-    ori.color("orange")
-    ori.begin_fill()
-    for i in range(2):
-        ori.forward(rect_size)
-        ori.right(90)
-        ori.forward(50)
-        ori.right(90)
-    ori.end_fill()
-    ori.penup()
-    ori.goto(0, 300)
+    ori.goto(300, -290)
     ori.pendown()
     ori.fillcolor("black")
     ori.color("black")
     ori.write("Player 2: " + str(player2_score), font=("Courier", 24, "bold"), align="center")
+
+def clear_scores(ori):
+    # draw rectangle over previous scores
+    rect_size = 1000
+    ori.penup()
+    ori.goto(-500, -220)
+    ori.pendown()
+    ori.fillcolor("orange")
+    ori.color("orange")
+    ori.setheading(0)
+    ori.begin_fill()
+    for i in range(2):
+        ori.forward(rect_size)
+        ori.right(90)
+        ori.forward(100)
+        ori.right(90)
+    ori.end_fill()
 
 def done():
     turtle.done()
