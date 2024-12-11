@@ -76,11 +76,13 @@ def start_round():
     while True:
         if player1_fired:
             cowboy_util.explosion(ori, True)
+            cowboy_util.blood_spurt(ori, False)
             point(1)
             util.draw_text(ori, "Player 1 wins!")
             return
         elif player2_fired and not is_computer:
             cowboy_util.explosion(ori, False)
+            cowboy_util.blood_spurt(ori, True)
             point(2)
             util.draw_text(ori, "Player 2 wins!")
             return
@@ -128,6 +130,9 @@ def main():
         if space_pressed:
             start_round()
             time.sleep(2)
+            cowboy_util.clear_cowboys(ori)
+            cowboy_util.player1(ori)
+            cowboy_util.player2(ori)
             util.draw_text(ori, "Press space to start a new round")
         turtle.update()
         time.sleep(0.1)
