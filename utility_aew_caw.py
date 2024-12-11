@@ -18,6 +18,7 @@ def setup_turtle(ori):
     ori.pencolor("black")
     ori.pensize(5)
     ori.speed(0)
+    ori.hideturtle()
     return ori
 
 def draw_text(ori, text):

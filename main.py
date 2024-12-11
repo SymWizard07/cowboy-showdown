@@ -1,4 +1,5 @@
 import utility_aew_caw as util
+import cowboy_utility_aew_caw as cowboy_util
 import turtle
 import random
 import time
@@ -93,11 +94,9 @@ listener.start()
 
 def __main__():
     util.draw_text(ori, "Press space to start a new round")
-    while True:
-        if space_pressed:
-            round_started = True
-            start_round()
-        time.sleep(1)
+    cowboy_util.player1(ori)
+    cowboy_util.player2(ori)
+    cowboy_util.explosion(ori, )
 
 __main__()
 turtle.done()
