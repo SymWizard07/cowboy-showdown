@@ -212,5 +212,44 @@ def explosion(ori, is_player1):
     return
 
 #blood spurt function
-def blood_spurt():
+def blood_spurt(ori, is_player1):
+    if is_player1:
+        ori.penup()
+        ori.setheading(0)
+        ori.goto(-300,-40)
+        ori.pendown()
+        ori.pencolor("red")
+        ori.fillcolor("red")
+        ori.begin_fill()
+        for i in range(20):
+            ori.forward(30)
+            ori.left(130)
+        ori.end_fill()
+    else:
+        ori.penup()
+        ori.setheading(180)
+        ori.goto(300,-40)
+        ori.pendown()
+        ori.pencolor("red")
+        ori.fillcolor("red")
+        ori.begin_fill()
+        for i in range(20):
+            ori.forward(30)
+            ori.left(130)
+        ori.end_fill()
     return
+
+#function to clear the explosion and blood
+def clear_cowboys(ori):
+    ori.setheading(0)
+    ori.goto(-350,100)
+    ori.pencolor("orange")
+    ori.fillcolor("orange")
+    ori.begin_fill()
+    #easy spiky blood
+    for i in range(2):
+        ori.forward(700)
+        ori.right(90)
+        ori.forward(150)
+        ori.right(90)
+        ori.end_fill()
