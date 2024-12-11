@@ -88,7 +88,3 @@ def draw_scores(ori, player1_score, player2_score):
 
 def done():
     turtle.done()
-
-#cowboy function
-def cowboy():
-    pass
