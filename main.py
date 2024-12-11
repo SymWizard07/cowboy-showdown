@@ -11,17 +11,22 @@ from pynput.keyboard import Key, Listener
 print("Would you like to play against a friend or the computer?")
 print("1. Friend")
 print("2. Computer")
-choice = input("Enter 1 or 2: ")
 is_computer = False
 
-if choice == "1":
-    print("You have chosen to play against a friend.")
-    print("Player 1: Press 'z' to fire")
-    print("Player 2: Press 'm' to fire")
-else:
-    print("You have chosen to play against the computer.")
-    print("Player 1: Press 'z' to fire")
-    is_computer = True
+while True:
+    choice = input("Enter 1 or 2: ")
+    if choice == "1":
+        print("You have chosen to play against a friend.")
+        print("Player 1: Press 'z' to fire")
+        print("Player 2: Press 'm' to fire")
+        break
+    elif choice == "2":
+        print("You have chosen to play against the computer.")
+        print("Player 1: Press 'z' to fire")
+        is_computer = True
+        break
+    print("Only enter a 1 or 2.")
+    
 
 screen = turtle.Screen()
 util.setup_screen(screen)
