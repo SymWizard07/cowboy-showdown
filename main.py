@@ -17,11 +17,8 @@ def on_press(key):
         pass
 
 def on_release(key):
-    if key == Key.esc:
-        # Stop listener
-        return False
+    pass
 
-# Collect events until released
 listener = Listener(on_press=on_press, on_release=on_release)
 listener.start()
 
