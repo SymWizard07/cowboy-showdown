@@ -1,3 +1,10 @@
+'''
+Programmer: Abigail and Cade Whitley
+Assignment: Final Programming Assignment
+Due Date: December 11, 2024
+Purpose: Cowboy Shootout game
+'''
+
 import utility_aew_caw as util
 import cowboy_utility_aew_caw as cowboy_util
 import turtle
